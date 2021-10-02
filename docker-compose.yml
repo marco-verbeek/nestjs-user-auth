@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  backend-dev:
+    container_name: cua-backend-dev
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    env_file:
+      - .env
+      - db.env
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_DB=dev
+    ports:
+      - 3000:3000
+    networks:
+      - api-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - database
+
+  backend-prod:
+    container_name: cua-backend-prod
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    command: npm run start:prod
+    env_file:
+      - .env
+      - db.env
+    environment:
+      - NODE_ENV=production
+      - POSTGRES_DB=prod
+    ports:
+      - 3000:3000
+    networks:
+      - api-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    env_file:
+      - db.env
+    restart: unless-stopped
+    networks:
+      - api-network
+    ports:
+      - 8080:8080
+
+networks:
+  api-network:
