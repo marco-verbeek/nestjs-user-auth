@@ -13,7 +13,7 @@ services:
       - db.env
     environment:
       - NODE_ENV=development
-      - POSTGRES_DB=dev
+      - POSTGRES_DB=cua_dev
     ports:
       - 3000:3000
     networks:
@@ -37,7 +37,7 @@ services:
       - db.env
     environment:
       - NODE_ENV=production
-      - POSTGRES_DB=prod
+      - POSTGRES_DB=cua_prod
     ports:
       - 3000:3000
     networks:
@@ -53,11 +53,19 @@ services:
     image: postgres
     env_file:
       - db.env
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=cua_dev,cua_prod
     restart: unless-stopped
     networks:
       - api-network
     ports:
-      - 8080:8080
+      - 5432:5432
+    volumes:
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+      - pgsql-data:/var/lib/postgresql/data
 
 networks:
   api-network:
+
+volumes:
+  pgsql-data:
