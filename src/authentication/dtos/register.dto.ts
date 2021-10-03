@@ -1,7 +1,7 @@
-export class CreateUserDto {
+export class RegisterDto {
   email: string;
   username: string;
   password: string;
 }
 
-export default CreateUserDto;
+export default RegisterDto;

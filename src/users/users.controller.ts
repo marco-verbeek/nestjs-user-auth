@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthenticationGuard } from 'src/authentication/guards/jwt-authentication.guard';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 
@@ -6,8 +7,14 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Get(':email')
+  async getUserByEmail(@Param('email') email: string) {
+    return this.usersService.getByEmail(email);
+  }
+
   @Get()
-  async getUsers() {
+  @UseGuards(JwtAuthenticationGuard)
+  async getAllUsers() {
     return this.usersService.getUsers();
   }
 
