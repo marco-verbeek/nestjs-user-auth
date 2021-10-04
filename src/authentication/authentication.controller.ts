@@ -11,7 +11,7 @@ import {
 import { Response } from 'express';
 import { AuthenticationService } from './authentication.service';
 import RegisterDto from './dtos/register.dto';
-import { JwtAuthenticationGuard } from './guards/jwt-authentication.guard';
+import JwtAuthenticationGuard from './guards/jwt-authentication.guard';
 import { LocalAuthenticationGuard } from './guards/local-authentication.guard';
 import RequestWithUser from './interfaces/request-with-user.interface';
 

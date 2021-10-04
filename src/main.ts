@@ -4,8 +4,8 @@ import { logger } from './middleware/logger.middleware';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.use(logger, cookieParser);
+  const app = await NestFactory.create(AppModule, { cors: true });
+  app.use(logger, cookieParser());
 
   await app.listen(3000);
 }
