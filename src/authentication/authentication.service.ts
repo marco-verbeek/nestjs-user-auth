@@ -44,6 +44,7 @@ export class AuthenticationService {
   async getAuthenticatedUser(email: string, plainTextPassword: string) {
     try {
       const user = await this.usersService.getByEmail(email);
+
       await this.verifyPassword(plainTextPassword, user.password);
       return user;
     } catch (error) {
