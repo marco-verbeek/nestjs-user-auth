@@ -40,27 +40,22 @@ export class AuthenticationController {
   @HttpCode(200)
   @UseGuards(LocalAuthenticationGuard)
   @Post('login')
-  login(@Req() request: RequestWithUser, @Res() response: Response) {
+  login(@Req() request: RequestWithUser) {
     const { user } = request;
+
     const cookie = this.authenticationService.getCookieWithJwtToken(user.id);
+    request.res.setHeader('Set-Cookie', cookie);
 
-    response.setHeader('Set-Cookie', cookie);
-    user.password = undefined;
-
-    return response.send(user);
+    return user;
   }
 
+  @HttpCode(200)
   @UseGuards(JwtAuthenticationGuard)
   @Post('logout')
-  logout(
-    @Req() request: RequestWithUser,
-    @Res({ passthrough: true }) response: Response,
-  ) {
-    response.setHeader(
+  logout(@Req() request: RequestWithUser) {
+    request.res.setHeader(
       'Set-Cookie',
       this.authenticationService.getCookieForLogOut(),
     );
-
-    return response.sendStatus(200);
   }
 }
