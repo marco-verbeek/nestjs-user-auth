@@ -10,8 +10,10 @@ import * as Joi from 'joi';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        JWT_SECRET: Joi.string().required(),
-        JWT_EXPIRATION_TIME: Joi.string().required(),
+        JWT_ACCESS_SECRET: Joi.string().required(),
+        JWT_ACCESS_EXPIRATION_TIME: Joi.string().required(),
+        JWT_REFRESH_SECRET: Joi.string().required(),
+        JWT_REFRESH_EXPIRATION_TIME: Joi.string().required(),
       }),
     }),
     DatabaseModule,

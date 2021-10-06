@@ -34,7 +34,7 @@ describe('AuthenticationService', () => {
   describe('when creating a cookie', () => {
     it('should return a string', () => {
       const userId = 1;
-      const token = authenticationService.getCookieWithJwtToken(userId);
+      const token = authenticationService.getCookieWithJwtAccessToken(userId);
 
       expect(typeof token).toEqual('string');
     });

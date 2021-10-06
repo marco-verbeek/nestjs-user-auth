@@ -6,6 +6,9 @@ export class User {
   @PrimaryGeneratedColumn()
   public id?: number;
 
+  @Column({ nullable: true })
+  public currentHashedRefreshToken?: string;
+
   @Column({ unique: true })
   @Expose()
   public email: string;
