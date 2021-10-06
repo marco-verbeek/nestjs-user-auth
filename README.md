@@ -5,7 +5,7 @@
 ## Description
 
 This project has been created while following <a target="_blank" href="https://wanago.io/">Wanago's</a> NestJS course.
-It taught different concepts: from user authentication using JWTs, to database entity relations using TypeORM, without forgetting about unit and integration testing, of course! 😀
+It taught different concepts: from user authentication using JWTs, to database entity relations using TypeORM, without forgetting about unit and integration testing, of course! 😀 Also decided to use Docker for this small project - not taught in Wanago's course.
 <br/>
 Uses the [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
