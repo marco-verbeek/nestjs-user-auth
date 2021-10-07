@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { AuthenticationService } from './authentication.service';
 import RegisterDto from './dtos/register.dto';
 import JwtAuthenticationGuard from './guards/jwt-authentication.guard';
